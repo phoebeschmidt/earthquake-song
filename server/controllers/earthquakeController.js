@@ -10,5 +10,8 @@ export function getEarthquakes(req, res) {
             const features = transformEarthquakes(results.features, offset, pageSize);
             res.send({features, total: features.length});
         })
-        .catch((e) => console.log(`Whoops! ${e}`))
+        .catch((e) => {
+          console.log(`Error: ${e}`);
+          res.status(500).send({ error: e.toString()});
+        })
 }
