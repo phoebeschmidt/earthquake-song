@@ -10,7 +10,10 @@ router.get('/', (req, res) => {
   res.send(config.HOMEPAGE_HTML);
 });
 
-//Supports query params offset, pageSize
+router.get('/hello', (req, res) => {
+  res.json("Hello World! From earthquake-song api.");
+})
+
 router.get('/earthquakes', earthquakeController.getEarthquakes);
 
 export default router;

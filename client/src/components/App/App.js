@@ -1,37 +1,37 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Chart } from '../Chart/Chart';
 
 class App extends Component {
   state = {
-   response: ''
+   response: '',
+   earthquakeData: []
  };
 
  componentDidMount() {
    this.callApi()
-     .then(res => this.setState({ response: res.express }))
+     .then(response => response.json())
+     .then(res => {
+       console.log(res.features);
+       this.setState({ earthquakeData: res.features });
+     })
      .catch(err => console.log(err));
  }
 
  callApi = () => {
-   return fetch('/api/hello')
-      .then(results => {
-          results = results.json();
-          console.log(results);
-          return results;
-      })
+   return fetch('/earthquakes');
  };
 
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Earthquake Song</h1>
         </header>
         <p className="App-intro">
           {this.state.response}
         </p>
+        <Chart dataPoints={this.state.earthquakeData}/>
       </div>
     );
   }

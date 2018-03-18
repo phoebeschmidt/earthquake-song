@@ -2,6 +2,7 @@ const homePage = `
 <div>
     <p>Welcome to the earthquake-song API!</p>
     You may access the following endpoints: </br></br>
+    <a href='/hello'>/</a></br>
     <a href='/earthquakes'>/earthquakes</a> </br>
     <a href='/earthquakes?offset=0&pageSize=5'>/earthquakes?offset=0&pageSize=5</a> </br>
     </br>
