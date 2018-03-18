@@ -1,7 +1,8 @@
 import { earthquake } from '../models/earthquakes';
 import config from '../config';
 
-export function transformEarthquakes(quakes) {
+export function transformEarthquakes(quakes, offset, pageSize) {
+    quakes = quakes.slice(offset, pageSize);
     const scaledTimes = scaleArray(quakes.map(x => x.properties.time), config.TIMESCALE_MIN, config.TIMESCALE_MAX);
     const scaledLatitudes = scaleArray(quakes.map(x => x.geometry.coordinates[0]), config.LATITUDE_MIN, config.LATITUDE_MAX);
     const scaledLongitudes = scaleArray(quakes.map(x => x.geometry.coordinates[1]), config.LONGITUDE_MIN, config.LONGITUDE_MAX);
@@ -29,11 +30,11 @@ export function transformEarthquakes(quakes) {
 
 }
 
-export function scaleArray(times, min, max) {
-    const totalMin = Math.min(...times);
-    const totalMax = Math.max(...times);
-    const scaleTimesFunc = myScaleFunc(min, max, totalMin, totalMax);
-    return times.map(scaleTimesFunc);
+export function scaleArray(times, minScale, maxScale) {
+    const minTotal = Math.min(...times);
+    const maxTotal = Math.max(...times);
+    const scaleFunc = myScaleFunc(minScale, maxScale, minTotal, maxTotal);
+    return times.map(scaleFunc);
 }
 
 function myScaleFunc(minScale, maxScale, minActual, maxActual) {

@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { scaleFunc, scaleTimes } from '../services/dataTransformer';
+import { scaleFunc, scaleArray } from '../services/dataTransformer';
 import config from '../config';
 
 describe('dataTransformer tests', () => {
@@ -22,7 +22,7 @@ describe('dataTransformer tests', () => {
             for (let i = 1; i < 10; i++) {
                 times.push(now - (i * 10));
             }
-            let result = scaleTimes(times, config.TIMESCALE_MIN, config.TIMESCALE_MAX);
+            let result = scaleArray(times, config.TIMESCALE_MIN, config.TIMESCALE_MAX);
             result.forEach(x => {
                 expect(x <= config.TIMESCALE_MAX).to.equal(true);
                 expect(x >= config.TIMESCALE_MIN).to.equal(true);
