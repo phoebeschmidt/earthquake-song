@@ -1,4 +1,4 @@
-##Earthquake-song Server##
+## Earthquake-song Server ##
 
 Small node and express server for earthquake-song project.
 
@@ -6,14 +6,15 @@ Small node and express server for earthquake-song project.
 
 GET `/earthquakes`
 
-| query params  |            
-| ------------- |-------------
-| `offset`      | offset for results
-| `pageSize`    | how many results you want returned
+| Query Params  | Description |          
+| ------------- |------------- |
+| `offset`      | offset for results |
+| `pageSize`    | how many results you want returned |
 
 Returns a selection of properties from the [USGS Earthquake Summary feed](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php), ordered by most recently occurring event.
 
-Returns
+Sample Response
+
 ```
 {
   features: [
