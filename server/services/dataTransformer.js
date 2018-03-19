@@ -1,11 +1,9 @@
 import { earthquake } from '../models/earthquakes';
 import config from '../config';
 
-export function transformEarthquakes(quakes, offset, pageSize) {
+export function transformEarthquakes(quakes, offset, pageSize, maxLat, maxLong) {
     quakes = quakes.slice(offset, pageSize);
-    const scaledTimes = scaleArray(quakes.map(x => x.properties.time), config.TIMESCALE_MIN, config.TIMESCALE_MAX);
-    const scaledLatitudes = scaleArray(quakes.map(x => x.geometry.coordinates[0]), config.LATITUDE_MIN, config.LATITUDE_MAX);
-    const scaledLongitudes = scaleArray(quakes.map(x => x.geometry.coordinates[1]), config.LONGITUDE_MIN, config.LONGITUDE_MAX);
+    const scaledTimes = scaleArray(quakes.map(x => x.properties.time), config.TIMESCALE_MIN, maxLat);
     return quakes.map((quake, i) => {
         const {mag, place, time, updated, tsunami, gap, nst} = quake.properties;
         const [longitude, latitude, depth] = quake.geometry.coordinates;
@@ -21,8 +19,6 @@ export function transformEarthquakes(quakes, offset, pageSize) {
           coordinates: {
             latitude,
             longitude,
-            scaledLatitude: scaledLatitudes[i],
-            scaledLongitude: scaledLongitudes[i],
             depth
           }
         };

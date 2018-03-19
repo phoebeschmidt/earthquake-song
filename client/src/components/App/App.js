@@ -1,26 +1,36 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Chart } from '../Chart/Chart';
+import Chart from '../Chart/Chart';
 
 class App extends Component {
-  state = {
-   response: '',
-   earthquakeData: []
- };
+    constructor(props) {
+        super(props);
+        this.state = {
+         response: '',
+         earthquakeData: [],
+         canvasWidth: 0,
+         canvasHeight: 0
+       };
+       this.callApi = this.callApi.bind(this);
+    }
 
- componentDidMount() {
-   this.callApi()
-     .then(response => response.json())
-     .then(res => {
-       console.log(res.features);
-       this.setState({ earthquakeData: res.features });
-     })
-     .catch(err => console.log(err));
- }
 
- callApi = () => {
-   return fetch('/earthquakes');
- };
+   componentDidMount() {
+     this.setState({
+        canvasWidth: window.innerWidth,
+        canvasHeight: window.innerHeight /2
+     });
+     this.callApi()
+       .then(response => response.json())
+       .then(res => {
+         this.setState({ earthquakeData: res.features });
+       })
+       .catch(err => console.log(err));
+   }
+
+   callApi = () => {
+     return fetch(`/earthquakes?width=${this.state.canvasWidth}`);
+   };
 
   render() {
     return (
@@ -31,7 +41,7 @@ class App extends Component {
         <p className="App-intro">
           {this.state.response}
         </p>
-        <Chart dataPoints={this.state.earthquakeData}/>
+        <Chart canvasWidth={this.state.canvasWidth} canvasHeight={this.state.canvasHeight} dataPoints={this.state.earthquakeData}/>
       </div>
     );
   }

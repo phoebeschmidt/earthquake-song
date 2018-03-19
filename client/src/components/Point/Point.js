@@ -8,21 +8,18 @@ export function Point(props) {
           x={props.x}
           y={props.y}
           fill={"magenta"}
-          stroke={"black"}
-          radius={props.radius}
+          radius={props.mag * 10}
+          stroke={(props.isFocused) ? "black" : ""}
+          opacity={(props.isFocused) ? 1 : .3}
       />
     )
-}
-
-Point.defaultProps = {
-  radius: 12
 }
 
 Point.propTypes = {
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired,
-  radius: PropTypes.number,
-  mag: PropTypes.number.isRequired
+  mag: PropTypes.number.isRequired,
+  isFocused: PropTypes.bool.isRequired
 }
 
 
