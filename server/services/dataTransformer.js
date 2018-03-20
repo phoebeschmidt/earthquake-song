@@ -1,4 +1,3 @@
-import { earthquake } from '../models/earthquakes';
 import config from '../config';
 
 export function transformEarthquakes(quakes, offset, pageSize) {
