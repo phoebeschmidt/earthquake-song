@@ -39,10 +39,7 @@ Node > 6 and NPM or NPX. I recommend using [NVM](https://github.com/creationix/n
 
 from `/server`:
 
-`npm run dev` to run both concurrently.
-
-OR, for development I prefer separate console windows (so I can more easily check for errors and make sure they are building on changes, etc):
-Still in `/server` directory, in one terminal tab run: `npm run server`, and in another: `npm run client`.
+in one terminal tab run: `npm run server`, and in another: `npm run client`.
 
 
 ### Server ###
@@ -113,6 +110,7 @@ Sample Response
 1. Unit testing. First any logic heavy React components and then more robust testing on server (incl. testing the dataFetcher with mocks)
 1. More features-- specifically being able to control parameters from the UI (# earthquakes displayed, size of canvas, audio sample used, which parameters control the sound, which parameters determine x,y)
 1. Responsive design. I've done nothing to optimize the display for smaller screens (tablet or mobile)
+1. Improve "musicality"-- so it sounds more like music and less like a DIY horror movie soundtrack
 
 ### Sources ###
 
