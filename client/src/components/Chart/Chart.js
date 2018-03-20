@@ -11,7 +11,7 @@ class Chart extends React.Component {
             selectedPoints: [],
             xBuffer: (window.innerWidth - props.canvasWidth) / 2,
             yBuffer: 100,
-            timeBuffer: 10
+            timeBuffer: 7
         }
         this.points = []
     }
@@ -35,9 +35,9 @@ class Chart extends React.Component {
         let earthquakePoints = [];
         this.props.dataPoints.forEach((point, i) => {
             const {mag, time, scaledTime} = point;
-            const { scaledDepth } = point.coordinates;
+            const { scaledDepth, depth } = point.coordinates;
             const playClip = () => {
-                this.props.playClipCallback(scaledDepth, (mag || 1));
+                this.props.playClipCallback(depth, (mag || .5)); //scale mag for volue
             }
             const refFn = (node) => {
                 this.points.push(node);
