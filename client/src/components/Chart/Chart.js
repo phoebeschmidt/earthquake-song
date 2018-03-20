@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Stage, Layer, Line, Label, Circle } from 'react-konva';
+import { Stage, Layer } from 'react-konva';
 import { Point } from '../Point/Point';
 import { ChartToolbar } from '../ChartToolbar/ChartToolbar';
 
@@ -9,7 +9,7 @@ class Chart extends React.Component {
         super(props);
         this.state = {
             selectedPoints: [],
-            xBuffer: window.innerWidth / 3,
+            xBuffer: (window.innerWidth - props.canvasWidth) / 2,
             yBuffer: 100,
             timeBuffer: 10
         }
@@ -19,11 +19,9 @@ class Chart extends React.Component {
     playAll(arr, timeBuffer) {
         return () => {
             arr.forEach((x, i) => {
-              console.log(x.scaledTime, timeBuffer + (x.scaledTime * timeBuffer), i);
                 setTimeout(() => {
                     let newSelectedPoints = this.state.selectedPoints;
                     newSelectedPoints[i] = true;
-                    // newSelectedPoints[i-1] = false;
                     this.setState({
                         selectedPoints: newSelectedPoints
                     });
@@ -34,14 +32,6 @@ class Chart extends React.Component {
                             selectedPoints: newSelectedPoints
                         })
                     }, x.scaledTime)
-                    // if(i === arr.length - 1) {
-                    //     setTimeout(() => {
-                    //         newSelectedPoints[i] = false;
-                    //         this.setState({
-                    //             selectedPoints: newSelectedPoints
-                    //         })
-                    //     }, timeBuffer)
-                    // }
                 }, timeBuffer + (x.scaledTime * timeBuffer))
             })
 
@@ -50,20 +40,15 @@ class Chart extends React.Component {
 
     render() {
         let earthquakePoints = [];
-        let axisPoints = [];
-        let labels = [];
         this.props.dataPoints.forEach((point, i) => {
             const {mag, time, scaledTime} = point;
-            let xPoint = this.state.xBuffer + scaledTime;
-            axisPoints.push(xPoint, this.state.yBuffer + 100);
-            earthquakePoints.push(<Point x={xPoint}
-                               y={this.state.yBuffer}
-                               mag={mag}
+            const { scaledDepth } = point.coordinates;
+            earthquakePoints.push(<Point x={this.state.xBuffer + scaledTime}
+                               y={this.state.yBuffer + scaledDepth}
+                               mag={mag || 1}
                                key={time}
                                isFocused={(this.state.selectedPoints.length > i) ? this.state.selectedPoints[i] : false}
                          />);
-            labels.push(<Label x={xPoint} y={this.state.yBuffer + 100 + 25} stroke={"black"} fill={"green"}/>,
-                        <Circle x={xPoint} y={this.state.yBuffer + 100} fill={"black"} stroke={"black"} radius={1}/>);
         });
         return (
           <div>
@@ -71,8 +56,6 @@ class Chart extends React.Component {
               <Stage width={this.props.canvasWidth} height={this.props.canvasHeight}>
                  <Layer>
                       {earthquakePoints}
-                      <Line points={axisPoints} tension={0} stroke={"black"}  />
-                      {labels}
                  </Layer>
              </Stage>
          </div>

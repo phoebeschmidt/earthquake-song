@@ -14,12 +14,14 @@ class App extends Component {
        this.callApi = this.callApi.bind(this);
     }
 
-
-   componentDidMount() {
+   componentWillMount() {
      this.setState({
-        canvasWidth: window.innerWidth,
+        canvasWidth: window.innerWidth - 200,
         canvasHeight: window.innerHeight /2
      });
+   }
+   componentDidMount() {
+
      this.callApi()
        .then(response => response.json())
        .then(res => {
@@ -29,7 +31,7 @@ class App extends Component {
    }
 
    callApi = () => {
-     return fetch(`/earthquakes?width=${this.state.canvasWidth}`);
+     return fetch(`/earthquakes`); //${(this.state.canvasWidth > 0) ? "?width=" + this.state.canvasWidth : ""}`);
    };
 
   render() {
