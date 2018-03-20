@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Stage, Layer } from 'react-konva';
-import { Point } from '../Point/Point';
+import Point from '../Point/Point';
 import { ChartToolbar } from '../ChartToolbar/ChartToolbar';
 
 class Chart extends React.Component {
@@ -13,28 +13,21 @@ class Chart extends React.Component {
             yBuffer: 100,
             timeBuffer: 10
         }
-
+        this.points = []
     }
 
-    playAll(arr, timeBuffer) {
+    playAll(timeBuffer) {
         return () => {
-            arr.forEach((x, i) => {
+            console.log("Playall triggered");
+            this.points.forEach((p, i) => {
+                if (!p) {
+                    return false;
+                }
                 setTimeout(() => {
-                    let newSelectedPoints = this.state.selectedPoints;
-                    newSelectedPoints[i] = true;
-                    this.setState({
-                        selectedPoints: newSelectedPoints
-                    });
-                    setTimeout(() => {
-                        let newSelectedPoints = this.state.selectedPoints;
-                        newSelectedPoints[i] = false;
-                        this.setState({
-                            selectedPoints: newSelectedPoints
-                        })
-                    }, x.scaledTime)
-                }, timeBuffer + (x.scaledTime * timeBuffer))
+                    p.focusAndPlay();
+                    p.props.playClip();
+                }, timeBuffer + (p.props.x * timeBuffer));
             })
-
         }
     }
 
@@ -43,16 +36,26 @@ class Chart extends React.Component {
         this.props.dataPoints.forEach((point, i) => {
             const {mag, time, scaledTime} = point;
             const { scaledDepth } = point.coordinates;
-            earthquakePoints.push(<Point x={this.state.xBuffer + scaledTime}
-                               y={this.state.yBuffer + scaledDepth}
-                               mag={mag || 1}
-                               key={time}
-                               isFocused={(this.state.selectedPoints.length > i) ? this.state.selectedPoints[i] : false}
-                         />);
+            const playClip = () => {
+                this.props.playClipCallback(scaledDepth, (mag || 1));
+            }
+            const refFn = (node) => {
+                this.points.push(node);
+            }
+            earthquakePoints.push(
+                <Point
+                    ref={refFn}
+                    x={this.state.xBuffer + scaledTime}
+                    y={this.state.yBuffer + scaledDepth}
+                    mag={mag || 1}
+                    key={time}
+                    isFocused={(this.state.selectedPoints.length > i) ? this.state.selectedPoints[i] : false}
+                    playClip={playClip}
+                />);
         });
         return (
           <div>
-              <ChartToolbar playAllCallback={this.playAll(this.props.dataPoints, this.state.timeBuffer)} />
+              <ChartToolbar playAllCallback={this.playAll(this.state.timeBuffer)} />
               <Stage width={this.props.canvasWidth} height={this.props.canvasHeight}>
                  <Layer>
                       {earthquakePoints}
@@ -67,7 +70,8 @@ class Chart extends React.Component {
 Chart.propTypes = {
     dataPoints: PropTypes.array.isRequired,
     canvasWidth: PropTypes.number.isRequired,
-    canvasHeight: PropTypes.number.isRequired
+    canvasHeight: PropTypes.number.isRequired,
+    playClipCallback: PropTypes.func
 }
 
 export default Chart;

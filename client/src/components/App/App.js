@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
 import Chart from '../Chart/Chart';
+import AudioWrapper from '../AudioWrapper/AudioWrapper';
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-         response: '',
          earthquakeData: [],
          canvasWidth: 0,
          canvasHeight: 0
@@ -15,37 +15,36 @@ class App extends Component {
     }
 
    componentWillMount() {
-     this.setState({
-        canvasWidth: window.innerWidth - 200,
-        canvasHeight: window.innerHeight /2
-     });
+       this.setState({
+          canvasWidth: window.innerWidth - 200,
+          canvasHeight: window.innerHeight /2
+       });
    }
+
    componentDidMount() {
-
-     this.callApi()
-       .then(response => response.json())
-       .then(res => {
-         this.setState({ earthquakeData: res.features });
-       })
-       .catch(err => console.log(err));
+       this.callApi(`/earthquakes`)
+         .then(response => response.json())
+         .then(res => {
+           this.setState({ earthquakeData: res.features });
+         })
+         .catch(err => console.log(err));
    }
 
-   callApi = () => {
-     return fetch(`/earthquakes`); //${(this.state.canvasWidth > 0) ? "?width=" + this.state.canvasWidth : ""}`);
+   callApi = (path) => {
+      return fetch(path); //${(this.state.canvasWidth > 0) ? "?width=" + this.state.canvasWidth : ""}`);
    };
 
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Earthquake Song</h1>
-        </header>
-        <p className="App-intro">
-          {this.state.response}
-        </p>
-        <Chart canvasWidth={this.state.canvasWidth} canvasHeight={this.state.canvasHeight} dataPoints={this.state.earthquakeData}/>
-      </div>
-    );
+      return (
+          <div className="App">
+              <header className="App-header">
+                  <h1 className="App-title">Earthquake Song</h1>
+              </header>
+              <AudioWrapper callApi={this.callApi} >
+                  <Chart canvasWidth={this.state.canvasWidth} canvasHeight={this.state.canvasHeight} dataPoints={this.state.earthquakeData}/>
+              </AudioWrapper>
+          </div>
+      );
   }
 }
 
