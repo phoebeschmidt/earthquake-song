@@ -42,11 +42,11 @@ class Point extends React.Component {
 }
 
 Point.propTypes = {
-  x: PropTypes.number.isRequired,
-  y: PropTypes.number.isRequired,
-  mag: PropTypes.number.isRequired,
-  isFocused: PropTypes.bool.isRequired,
-  playClip: PropTypes.func
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired,
+    mag: PropTypes.number.isRequired,
+    isFocused: PropTypes.bool.isRequired,
+    playClip: PropTypes.func
 }
 
 export default Point;

@@ -9,23 +9,22 @@ export function transformEarthquakes(quakes, offset, pageSize) {
         const {mag, place, time, updated, tsunami, gap, nst} = quake.properties;
         const [longitude, latitude, depth] = quake.geometry.coordinates;
         return {
-          mag,
-          place,
-          time,
-          scaledTime: scaledTimes[i],
-          updated,
-          tsunami,
-          gap,
-          nst,
-          coordinates: {
-            latitude,
-            longitude,
-            depth,
-            scaledDepth: scaledDepths[i]
-          }
+            mag,
+            place,
+            time,
+            scaledTime: scaledTimes[i],
+            updated,
+            tsunami,
+            gap,
+            nst,
+            coordinates: {
+                latitude,
+                longitude,
+                depth,
+                scaledDepth: scaledDepths[i]
+            }
         };
     })
-
 }
 
 export function scaleArray(times, minScale, maxScale) {
@@ -37,7 +36,7 @@ export function scaleArray(times, minScale, maxScale) {
 
 function myScaleFunc(minScale, maxScale, minActual, maxActual) {
     return (x) => {
-      return scaleFunc(x, minScale, maxScale, minActual, maxActual);
+        return scaleFunc(x, minScale, maxScale, minActual, maxActual);
     }
 }
 
