@@ -16,4 +16,6 @@ router.get('/hello', (req, res) => {
 
 router.get('/earthquakes', earthquakeController.getEarthquakes);
 
+router.get('/sound', earthquakeController.getSound);
+
 export default router;

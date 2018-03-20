@@ -5,6 +5,7 @@ const homePage = `
     <a href='/hello'>/</a></br>
     <a href='/earthquakes'>/earthquakes</a> </br>
     <a href='/earthquakes?offset=0&pageSize=5'>/earthquakes?offset=0&pageSize=5</a> </br>
+    <a href='/sound'>/sound</a> </br> This retrieves a .wav file used for sound in the earthquake-song app.
     </br>
 </div>
 `
