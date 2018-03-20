@@ -35,6 +35,7 @@ class App extends Component {
     };
 
     render() {
+        console.log(this.state.earthquakeData[0])
         return (
             <div className="App">
                 <header className="App-header">
@@ -51,8 +52,13 @@ class App extends Component {
                         quake occurred. The radius is a scaled based on the magnitude.
                     </p>
                     <p>
-                        When you click "Play All", an audio sample plays for each earthquake. Each sound you hear is the same sample, with the volume and playback speed, or "pitch", scaled
-                        based on the magnitude and depth, respectively. The time between each sample is relative to the times between each earthquake.
+                        When you click "Play All", an audio sample plays for each earthquake. Each sound you hear is the same sample, with the volume and playback rate scaled
+                        based on the magnitude and depth respectively. Playback rate affects the "pitch" you hear. The time offset of a note from the beginning of the song is proportional
+                        to the amount of "real world time" between the first earthquake in the set and the earthquake represented by the note. Ex: The first {"earthquake's"} note in this set takes place at
+                        0 secs into the song, and occurred at {(this.state.earthquakeData[0]) ? new Date(this.state.earthquakeData[0].time).toString() : ""}
+
+                        The time at which you hear each sample is proportional to
+                        the times at which each earthquake occurred.
                     </p>
                     <p>
                         For more information and documentation about how these characteristics are measured, visit the <a href="https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php">USGS</a> website.
