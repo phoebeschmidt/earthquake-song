@@ -21,7 +21,7 @@ export function getEarthquakes(req, res) {
 export function getSound(req, res) {
     const soundFilePath = path.join(__dirname, "../static/piano-c.wav");
 
-    fs.stat(soundFilePath, (err, stat) => {
+    fs.stat(soundFilePath, (err) => {
         if (!err) {
         res.writeHead(200, {
             "Content-Type": "application/octet-stream",

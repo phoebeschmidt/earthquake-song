@@ -50,12 +50,15 @@ cd server/
 npm install
 npm start
 ```
+Server runs at `localhost:5000`.
+
 
 ```
 cd client/
 npm install
 npm start
 ```
+Client runs at `localhost:3000`.
 
 **Testing**
 
