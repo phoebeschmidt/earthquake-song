@@ -6,7 +6,8 @@ class AudioWrapper extends React.Component {
         super(props);
         this.playClip = this.playClip.bind(this);
         this.state = {
-            context: new AudioContext()
+            context: new AudioContext(),
+            audioClip: ""
         }
     }
 

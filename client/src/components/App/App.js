@@ -22,7 +22,7 @@ class App extends Component {
 
     componentWillMount() {
         this.setState({
-            canvasWidth: window.innerWidth - 200,
+            canvasWidth: window.innerWidth - 200, //attempts to pad the canvas a bit
             canvasHeight: window.innerHeight / 2
         });
     }
@@ -39,7 +39,7 @@ class App extends Component {
         rawResponse.json().then(res => {
             this.setState({ earthquakeData: res.features });
         })
-            .catch(err => console.log(err));
+        .catch(err => console.log(err));
     }
 
     callApi = (path, offset = null, pageSize =  null) => {

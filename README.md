@@ -203,15 +203,15 @@ representing this point.
 
 ### Priorities for Next Steps ###
 
-1. More unit testing. First any logic heavy React components and then more robust testing on server (incl. testing the dataFetcher with mocks)
+1. Unit testing. First any logic heavy React components and then more robust testing on server (incl. testing the dataFetcher with mocks)
+1. Styling. Make some better x/y adjustments with canvas so content is centered, not cut off. Make buttons a bit prettier.
+1. Responsive design. I've done nothing to optimize the display for smaller screens (tablet or mobile)
 1. More features
     1. Ability to dynamically choose which parameters to scale* (see note in [reflections](#other-reflections) section)
     1. Ability to control parameters from the UI (# earthquakes displayed, size of canvas, audio sample used, which parameters control the sound, which parameters determine x,y)
     1. Using more data from the api-- ex: adding hover or click functionality that shows where the earthquake took place
     1. Axes with labels (so I can show what the data means instead of explaining in text)
-1. Responsive design. I've done nothing to optimize the display for smaller screens (tablet or mobile)
 1. Improve "musicality"-- so it sounds more like music and less like a DIY horror movie soundtrack
-1. Styling. Make the text and buttons a bit prettier
 
 ### Other Reflections ###
 I made the decision to use the node/express API to transform the data into what I wanted to use in the client. Although 
