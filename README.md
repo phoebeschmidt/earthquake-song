@@ -109,29 +109,46 @@ Returns a selection of properties from the [USGS Earthquake Summary feed](https:
 
 
 Sample Response
-//TODO update sample response!!!!!!!!!!!!!!!!!!
+
 ```
 {
-  features: [
-      {
-          mag: 1.9,
-          place: "89km NW of Larsen Bay, Alaska",
-          time: 1521399362054,
-          scaledTime: 94.17179965553022,
-          updated: 1521399556811,
-          tsunami: 0,
-          gap: null,
-          nst: null,
-          coordinates: {
-            latitude: 58.0599,
-            longitude: -155.1272,
-            scaledLatitude: 0.4618104485420839,
-            scaledLongitude: 500.0040756807466,
-            depth: 49
-          }
-      },
-  ],
-  total: 1
+    "features": [
+        {
+            "mag": 1.5899999999999999,
+            "scaledMag": null,
+            "place": "6km NW of Nuevo, CA",
+            "time": 1521633001010,
+            "scaledTime": 1000,
+            "updated": 1521633218240,
+            "tsunami": 0,
+            "gap": 101,
+            "nst": 14,
+            "coordinates": {
+                "latitude": 33.8495,
+                "longitude": -117.1853333,
+                "depth": 8.46,
+                "scaledDepth": 0
+            }
+        },
+        {
+            "mag": 2,
+            "scaledMag": null,
+            "place": "5km NE of Carson City, Nevada",
+            "time": 1521632770280,
+            "scaledTime": 0,
+            "updated": 1521632866402,
+            "tsunami": 0,
+            "gap": 133.29,
+            "nst": 8,
+            "coordinates": {
+                "latitude": 39.2057,
+                "longitude": -119.7283,
+                "depth": 14,
+                "scaledDepth": 400
+            }
+        }
+    ],
+    "total": 2
 }
 ```
 
@@ -188,12 +205,30 @@ representing this point.
 
 1. More unit testing. First any logic heavy React components and then more robust testing on server (incl. testing the dataFetcher with mocks)
 1. More features
+    1. Ability to dynamically choose which parameters to scale* (see note in [reflections](#other-reflections) section)
     1. Ability to control parameters from the UI (# earthquakes displayed, size of canvas, audio sample used, which parameters control the sound, which parameters determine x,y)
     1. Using more data from the api-- ex: adding hover or click functionality that shows where the earthquake took place
     1. Axes with labels (so I can show what the data means instead of explaining in text)
 1. Responsive design. I've done nothing to optimize the display for smaller screens (tablet or mobile)
 1. Improve "musicality"-- so it sounds more like music and less like a DIY horror movie soundtrack
 1. Styling. Make the text and buttons a bit prettier
+
+### Other Reflections ###
+I made the decision to use the node/express API to transform the data into what I wanted to use in the client. Although 
+the browser could easily perform a simple scaling operation, the idea was to manipulate the data as little as possible 
+in the frontend; just display it in the right places! 
+
+But I quickly realized the scaled values rely on dimensions in the client.
+(to transform time of an earthquake --> location in canvas, I need to know how big the canvas is. Ideally my max scaled value would be 
+{canvasWidth - some padding}, so my points don't display cut off). Right now the API relies on some default values I hard-coded in a config file. This is 
+brittle because I just choose some values that look good on an average monitor, which assumes the user is using a browser on a desktop machine. 
+The server shouldn't "know" about these dimensions at all. An ideal future feature would be to pass in the min and max scaledValues with the request.
+
+Additionally, it would be awesome if we could dynamically choose which parameters to scale in the request. The server 
+currently always scales depth, magnitude, and time. It's hardcoded, which also shows too much "knowledge" of what the client needs in the server.
+
+For the time and scope of this project, I decided to keep a small and easy to maintain API without too many dynamic parts, but this came at the cost of 
+a completely separated front- and backend.
 
 ### Sources ###
 

@@ -19,11 +19,6 @@ const config = {
     DEPTHSCALE_MIN: 0,
     DEPTHSCALE_MAX: 400,
     MAGSCALE_MIN: 0,
-    MAGSCALE_MAX: 1,
-    // LATITUDE_MIN: 0,
-    // LATITUDE_MAX: 1000,
-    // LONGITUDE_MIN: 0,
-    // LONGITUDE_MAX: 600,
     HOMEPAGE_HTML: homePage
 };
 
