@@ -12,14 +12,13 @@ class Chart extends React.Component {
             xBuffer: (window.innerWidth - props.canvasWidth) / 2,
             yBuffer: 100,
             timeBuffer: 7
-        }
+        };
         this.points = []
     }
 
     playAll(timeBuffer) {
         return () => {
-            console.log("Playall triggered");
-            this.points.forEach((p, i) => {
+            this.points.forEach((p) => {
                 if (!p) {
                     return false;
                 }
@@ -38,10 +37,10 @@ class Chart extends React.Component {
             const { scaledDepth, depth } = point.coordinates;
             const playClip = () => {
                 this.props.playClipCallback(depth, (mag || .5)); //scale mag for volue
-            }
+            };
             const refFn = (node) => {
                 this.points.push(node);
-            }
+            };
             earthquakePoints.push(
                 <Point
                     ref={refFn}
@@ -72,6 +71,6 @@ Chart.propTypes = {
     canvasWidth: PropTypes.number.isRequired,
     canvasHeight: PropTypes.number.isRequired,
     playClipCallback: PropTypes.func
-}
+};
 
 export default Chart;

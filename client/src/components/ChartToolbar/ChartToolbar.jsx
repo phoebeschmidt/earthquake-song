@@ -14,4 +14,4 @@ ChartToolbar.propTypes = {
     playAllCallback: PropTypes.func,
     playNextCallback: PropTypes.func,
     playPrevCallback: PropTypes.func
-}
+};

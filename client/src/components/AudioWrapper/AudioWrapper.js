@@ -49,6 +49,6 @@ class AudioWrapper extends React.Component {
 
 AudioWrapper.propTypes = {
     callApi: PropTypes.func.isRequired
-}
+};
 
 export default AudioWrapper;

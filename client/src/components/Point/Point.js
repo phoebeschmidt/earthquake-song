@@ -47,6 +47,6 @@ Point.propTypes = {
     mag: PropTypes.number.isRequired,
     isFocused: PropTypes.bool.isRequired,
     playClip: PropTypes.func
-}
+};
 
 export default Point;

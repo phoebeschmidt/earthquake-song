@@ -2,9 +2,10 @@
   "name": "earthquake-song",
   "version": "1.0.0",
   "scripts": {
+    "start": "babel-node server.js",
+    "dev": "nodemon server.js --exec babel-node",
     "client": "cd ../client && npm start",
-    "server": "nodemon server.js --exec babel-node --presets es2015",
-    "test": "mocha --compilers js:babel-core/register"
+    "test": "mocha --require babel-core/register"
   },
   "dependencies": {
     "express": "^4.16.2",

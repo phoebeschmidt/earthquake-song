@@ -1,6 +1,7 @@
 ## Earthquake-song Server ##
 
-Small node and express server for earthquake-song project.
+Small node and express server for earthquake-song project. See top-level readme for more specifics about entire project and how this piece
+fits in with the rest.
 
 ### Routes ###
 
