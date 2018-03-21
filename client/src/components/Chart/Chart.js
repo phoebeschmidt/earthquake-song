@@ -33,10 +33,10 @@ class Chart extends React.Component {
     render() {
         let earthquakePoints = [];
         this.props.dataPoints.forEach((point, i) => {
-            const {mag, time, scaledTime} = point;
+            const {mag, scaledMag, time, scaledTime} = point;
             const { scaledDepth, depth } = point.coordinates;
             const playClip = () => {
-                this.props.playClipCallback(depth, (mag || .5)); //scale mag for volue
+                this.props.playClipCallback(depth, scaledMag);
             };
             const refFn = (node) => {
                 this.points.push(node);
