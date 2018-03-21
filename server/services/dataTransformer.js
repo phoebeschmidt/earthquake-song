@@ -1,14 +1,14 @@
 import config from '../config';
 
 export function transformEarthquakes(quakes, offset, pageSize) {
-    quakes = quakes.slice(offset, pageSize);
+    quakes = quakes.slice(offset, offset + pageSize);
     const scaledTimes = scaleArray(quakes.map(x => x.properties.time), config.TIMESCALE_MIN, config.TIMESCALE_MAX);
     const scaledDepths = scaleArray(quakes.map(x => x.geometry.coordinates[2]), config.DEPTHSCALE_MIN, config.DEPTHSCALE_MAX);
     return quakes.map((quake, i) => {
         const {mag, place, time, updated, tsunami, gap, nst} = quake.properties;
         const [longitude, latitude, depth] = quake.geometry.coordinates;
         return {
-            mag,
+            mag: mag + 1, //Magnitude is on a scale of [-1, 10]. We only want to return positive values, so + 1
             place,
             time,
             scaledTime: scaledTimes[i],
