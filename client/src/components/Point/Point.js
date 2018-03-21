@@ -8,7 +8,11 @@ class Point extends React.Component {
         this.focusAndPlay = this.focusAndPlay.bind(this);
         this.temporarilyFocus = this.temporarilyFocus.bind(this);
         this.state = {
-            isFocused: false
+            isFocused: false,
+            radiusMultiplier: 7,
+            focusInterval: 700,
+            focusOpacity: 1,
+            unfocusOpacity: .3
         }
     }
 
@@ -24,7 +28,7 @@ class Point extends React.Component {
     }
 
     focusAndPlay() {
-        this.temporarilyFocus(700);
+        this.temporarilyFocus(this.state.focusInterval);
         this.props.playClip();
     }
 
@@ -34,9 +38,9 @@ class Point extends React.Component {
                 x={this.props.x}
                 y={this.props.y}
                 fill={"magenta"}
-                radius={this.props.mag * 7}
+                radius={this.props.mag * this.state.radiusMultiplier}
                 stroke={(this.state.isFocused) ? "black" : ""}
-                opacity={(this.state.isFocused) ? 1 : .3}
+                opacity={(this.state.isFocused) ? this.state.focusOpacity : this.state.unfocusOpacity}
             />)
     }
 }
@@ -45,7 +49,6 @@ Point.propTypes = {
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
     mag: PropTypes.number.isRequired,
-    isFocused: PropTypes.bool.isRequired,
     playClip: PropTypes.func
 };
 
