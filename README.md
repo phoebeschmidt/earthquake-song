@@ -114,37 +114,37 @@ Sample Response
 {
     "features": [
         {
-            "mag": 1.5899999999999999,
-            "scaledMag": null,
-            "place": "6km NW of Nuevo, CA",
-            "time": 1521633001010,
+            "mag": 2.08,
+            "scaledMag": 0.06596858638743457,
+            "place": "13km NNE of Indio, California",
+            "time": 1521636771920,
             "scaledTime": 1000,
-            "updated": 1521633218240,
+            "updated": 1521636896545,
             "tsunami": 0,
-            "gap": 101,
-            "nst": 14,
+            "gap": 117,
+            "nst": 36,
             "coordinates": {
-                "latitude": 33.8495,
-                "longitude": -117.1853333,
-                "depth": 8.46,
-                "scaledDepth": 0
+                "latitude": 33.8424988,
+                "longitude": -116.1804962,
+                "depth": 7.78,
+                "scaledDepth": 30.176331576077082
             }
         },
         {
-            "mag": 2,
-            "scaledMag": null,
-            "place": "5km NE of Carson City, Nevada",
-            "time": 1521632770280,
-            "scaledTime": 0,
-            "updated": 1521632866402,
+            "mag": 2.1799999999999997,
+            "scaledMag": 0.07643979057591622,
+            "place": "7km NW of The Geysers, CA",
+            "time": 1521635687160,
+            "scaledTime": 957.7570289260922,
+            "updated": 1521636543698,
             "tsunami": 0,
-            "gap": 133.29,
-            "nst": 8,
+            "gap": 72,
+            "nst": 19,
             "coordinates": {
-                "latitude": 39.2057,
-                "longitude": -119.7283,
-                "depth": 14,
-                "scaledDepth": 400
+                "latitude": 38.822834,
+                "longitude": -122.8048325,
+                "depth": 2.46,
+                "scaledDepth": 10.834393746591529
             }
         }
     ],

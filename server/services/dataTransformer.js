@@ -5,7 +5,7 @@ export function transformEarthquakes(quakes, offset, pageSize) {
     const scaledTimes = scaleArray(quakes.map(x => x.properties.time), config.TIMESCALE_MIN, config.TIMESCALE_MAX);
     const scaledDepths = scaleArray(quakes.map(x => x.geometry.coordinates[2]), config.DEPTHSCALE_MIN, config.DEPTHSCALE_MAX);
     //Richter scale is [-1, 10] and we want to scale based on these constraints instead of the min/max of the provided data points
-    const scaledMags = scaleArray(quakes.map(x => x.properties.mag), config.MAGSCALE_MIN, config.MAGSCALE_MAX, -1, 10);
+    const scaledMags = scaleArray(quakes.map(x => x.properties.mag), config.MAGSCALE_MIN, config.MAGSCALE_MAX, 0, 10);
     return quakes.map((quake, i) => {
         const {mag, place, time, updated, tsunami, gap, nst} = quake.properties;
         const [longitude, latitude, depth] = quake.geometry.coordinates;

@@ -26,7 +26,7 @@ class AudioWrapper extends React.Component {
         const gain = this.state.context.createGain();
         gain.connect(this.state.context.destination);
         source.buffer = this.state.audioClip;
-        gain.gain.value = volume;
+        gain.gain.setValueAtTime(volume, this.state.context.currentTime);
         //This ensures each volume of each clip goes to 0 by 2 sec
         //Eliminates bad click sound on refresh
         gain.gain.linearRampToValueAtTime(0, this.state.context.currentTime + 2);

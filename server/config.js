@@ -19,6 +19,7 @@ const config = {
     DEPTHSCALE_MIN: 0,
     DEPTHSCALE_MAX: 400,
     MAGSCALE_MIN: 0,
+    MAGSCALE_MAX: 1,
     HOMEPAGE_HTML: homePage
 };
 
