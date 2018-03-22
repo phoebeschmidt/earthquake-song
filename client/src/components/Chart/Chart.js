@@ -13,9 +13,12 @@ class Chart extends React.Component {
             yBuffer: 100,
             timeBuffer: 7
         };
-        this.points = []
+        this.points = [];
     }
 
+    componentWillReceiveProps() {
+        this.points = [];
+    }
     playAll(timeBuffer) {
         return () => {
             this.points.forEach((p) => {
