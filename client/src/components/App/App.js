@@ -80,8 +80,9 @@ class App extends Component {
                         Top of the screen is most shallow, bottom is deepest. The radius is scaled by the magnitude of the earthquake.
                     </p>
                     <p>
-                        When you click <BoldText text="Play All" />, an audio sample plays for each earthquake. Each sound you hear is the same sample, with the volume and playback rate scaled
-                        by the magnitude and depth respectively. Playback rate affects the "pitch" you hear. (volume --> magnitude, depth --> playback rate).
+                        When you click <BoldText text="Play All" />, an audio sample plays for each earthquake. Each sound you hear is the same sample. The volume is proportional
+                        to the magnitude, and the depth is inversely proportional to the playback rate. Playback rate affects the "pitch" you hear.
+                        (volume --> magnitude, 100/(depth + .01) --> playback rate). Deeper earthquakes then have a deeper "pitch", and larger scale earthquakes have a louder tone.
                         The time offset of a note from the beginning of the song is proportional to the amount of "real world time" between the first earthquake in the set and the
                         earthquake represented by the note. After playing, each point remains "focused" (bold, opaque, and with an outline) for a fixed amount of time.
                     </p>

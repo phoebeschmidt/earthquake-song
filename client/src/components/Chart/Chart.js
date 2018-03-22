@@ -39,7 +39,7 @@ class Chart extends React.Component {
             const {mag, scaledMag, time, scaledTime} = point;
             const { scaledDepth, depth } = point.coordinates;
             const playClip = () => {
-                this.props.playClipCallback(depth, scaledMag);
+                this.props.playClipCallback(10/(depth + .01), scaledMag);
             };
             const refFn = (node) => {
                 this.points.push(node);
